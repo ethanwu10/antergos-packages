@@ -4,25 +4,24 @@
 pkgname=(pamac pamac-tray-appindicator)
 pkgver=6.3.2
 _pkgver=6.3.2
-pkgrel=1
+pkgrel=2
 pkgdesc='A GTK3 frontend for libalpm'
 arch=('x86_64')
 url='https://github.com/manjaro/pamac'
 license=('GPL3')
 depends=(
-	'glib2' 'json-glib' 'libsoup' 'dbus-glib' 'polkit' 'vte3' 'gtk3'
-	'libnotify' 'desktop-file-utils' 'pacman>=5.0' 'pacman<5.1' 'gnutls'
+	'glib2>=2.42' 'json-glib' 'libsoup' 'dbus-glib' 'polkit' 'vte3>=0.38' 'gtk3>=3.22'
+	'libnotify' 'desktop-file-utils' 'pacman>=5.0' 'gnutls>=3.4'
 	'appstream-glib' 'archlinux-appstream-data'
 )
-makedepends=('gettext' 'itstool' 'vala' 'git' 'libappindicator-gtk3' 'meson')
+makedepends=('gettext' 'itstool' 'vala>=0.36.6' 'git' 'libappindicator-gtk3' 'meson')
 backup=('etc/pamac.conf')
 conflicts=('pamac-dev')
 source=(
 	"pamac-$_pkgver.tar.gz::$url/archive/v$_pkgver.tar.gz"
-	"git-$pkgver-$pkgrel.patch::https://github.com/manjaro/pamac/compare/v$_pkgver...afd343e.patch"
+	#"git-$pkgver-$pkgrel.patch::https://github.com/manjaro/pamac/compare/v$_pkgver...afd343e.patch"
 )
-md5sums=('22508eb520f23a923078e01d6e6ad21a'
-         'd41d8cd98f00b204e9800998ecf8427e')
+sha256sums=('e37b61bb5dce96e284562d10bcf84444a5e2698a85d38702888fdbd21685be38')
 
 
 # BEGIN ANTBS METADATA
@@ -41,7 +40,7 @@ prepare() {
 	sed -i -e "s|\"$_pkgver\"|\"$pkgver-$pkgrel\"|g" src/manager_window.vala 
 
 	# patches here
-	patch -Np1 -i ../../"git-$pkgver-$pkgrel.patch"
+	#patch -Np1 -i ../../"git-$pkgver-$pkgrel.patch"
 }
 
 build() {
